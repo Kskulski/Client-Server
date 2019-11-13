@@ -1,7 +1,7 @@
 import socket
 s = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
 
-s.bind(('0.0.0.0', 8070))
+s.bind(('0.0.0.0', 8080))
 s.listen(20)
 
 while True:
