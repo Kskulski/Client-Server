@@ -1,5 +1,5 @@
 import socket
-remote_server = ('127.0.0.1', 8070)
+remote_server = ('127.0.0.1', 8080)
 
 s = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
 
