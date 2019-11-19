@@ -1,5 +1,15 @@
 import socket
-remote_server = ('127.0.0.1', 8080)
+
+class Client:
+    def connect(self, host, port):
+        remote_server = (host, port)
+        s = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
+        s.connect(remote_server)
+
+    def send(self, ):
+
+
+'''remote_server = ('127.0.0.1', 8080)'''
 
 s = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
 

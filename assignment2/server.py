@@ -1,8 +1,12 @@
 import socket
-s = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
 
-s.bind(('0.0.0.0', 8080))
-s.listen(1)
+class Server:
+    global s
+    s = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
+
+    def listen(self, port):
+        s.bind(('0.0.0.0', port))
+        s.listen(1)
 
 while True:
     conn, remote_addr = s.accept()
