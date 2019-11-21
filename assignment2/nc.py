@@ -1,6 +1,7 @@
 import click
 from client import Client
-from server import Server
+#from server import Server
+from servertest import Server
 
 @click.group()
 def cli():
@@ -12,17 +13,18 @@ def cli():
 @click.option('--i', is_flag=True, help='Interactive mode')
 def connect(port, host, i):
     """Connects to a TCP server on HOST PORT. Defaults to localhost 8080"""
-    Client.connect(host, port, i)
     click.echo('Connecting to {}:{}'.format(host, port))
+    client = Client()
+    client.connect(host, port, i)
 
 
 @cli.command()
 @click.option('--port', type=int, default=8080)
 def listen(port):
     """Runs in server mode and listens on port --port."""
+    click.echo('Starting server on port: {}'.format(port))
     server = Server()
     server.listen(port)
-    click.echo('Starting server onport: {}'.format(port))
 
 if __name__ == '__main__':
     cli()

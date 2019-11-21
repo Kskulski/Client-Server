@@ -26,4 +26,3 @@ class Server:
                 conn.send('Echo: {} - Good Buy!'.format(message).encode('utf-8'))
                 conn.shutdown(socket.SHUT_RDWR)
                 conn.close()
-        s.close()
