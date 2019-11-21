@@ -26,7 +26,6 @@ class Client:
                 print('Got back: {}'.format(data.decode('utf-8')))
 
 
-
 '''remote_server = ('127.0.0.1', 8080)
 s = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
 s.connect(remote_server)
@@ -36,4 +35,3 @@ data = s.recv(2000)
 s.shutdown(socket.SHUT_RD)
 s.close()
 print('Got back: {}'.format(data.decode('utf')))'''
-
