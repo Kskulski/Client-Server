@@ -2,7 +2,6 @@ import socket
 
 
 class Client:
-
     def connect(self, host, port, i):
         remote_server = (host, port)
         s = socket.socket(socket.AF_INET, socket.SOCK_STREAM)

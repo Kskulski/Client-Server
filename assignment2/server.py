@@ -21,8 +21,11 @@ class Server:
                     data = conn.recv(2000)
                     if not data:
                         break
+
                 message = ''.join(chunks)
                 print('received {} from  {}'.format(message, remote_addr))
                 conn.send('Echo: {} - Good Buy!'.format(message).encode('utf-8'))
+
                 conn.shutdown(socket.SHUT_RDWR)
                 conn.close()
+                break
