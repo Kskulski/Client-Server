@@ -9,18 +9,18 @@ class Server:
         while True:
             conn, remote_addr = s.accept()
             print('[+] connection from {}'.format(remote_addr))
+            chunks = []
             while True:
                 data = conn.recv(2000)
                 if not data:
                     break
-                chunks = []
                 while True:
                     chunks.append(data.decode('utf-8'))
                     if data.decode('utf-8').endswith('.'):
                         break
                     data = conn.recv(2000)
-                    if not data:
-                        break
+                    #if not data:
+                     #   break
 
                 message = ''.join(chunks)
                 print('received {} from  {}'.format(message, remote_addr))
