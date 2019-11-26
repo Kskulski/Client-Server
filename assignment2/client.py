@@ -18,12 +18,14 @@ class Client:
             s.close()
             print('Got back: {}'.format(data.decode('utf-8')))
         if i:
-            while input() != 'quit':
+            while True:
                 while True:
                     message = input()
                     s.send(message.encode('utf-8'))
-                    if message.endswith('.'):
+                    if message.endswith('.') or message == 'quit':
                         break
+                if message == 'quit':
+                    break
                 data = s.recv(2000)
                 print('Got back: {}'.format(data.decode('utf-8')))
             s.shutdown(socket.SHUT_WR)

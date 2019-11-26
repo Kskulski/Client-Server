@@ -1,5 +1,4 @@
 import socket
-import threading
 
 
 class Server:
@@ -18,7 +17,9 @@ class Server:
                         break
                     chunks.append(data.decode('utf-8'))
                     message = ''.join(chunks)
-                    self.data_received(conn, remote_addr, message)
+                    end = self.data_received(conn, remote_addr, message)
+                    if end:
+                        break
                     chunks.append(' ')
                 if not data or data.decode('utf-8') == 'quit':
                     break
@@ -26,10 +27,12 @@ class Server:
             conn.shutdown(socket.SHUT_RDWR)
             conn.close()
             break
-        #threading.Timer(120)
-        #print('Server shutting down. Good Bye!')
+        print('Server shutting down. Good Bye!')
 
     def data_received(self, conn, remote_addr, message):
         if message.endswith('.'):
             print('received: {} from {}'.format(message, remote_addr))
             conn.send('Echo: {}'.format(message).encode('utf-8'))
+            return True
+        else:
+            return False
