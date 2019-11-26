@@ -7,7 +7,11 @@ class Client:
         s = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
         s.connect(remote_server)
         if not i:
-            s.sendall(input().encode('utf-8'))
+            while True:
+                message = input()
+                s.send(message.encode('utf-8'))
+                if message.endswith('.'):
+                    break
             s.shutdown(socket.SHUT_WR)
             data = s.recv(2000)
             s.shutdown(socket.SHUT_RD)
@@ -15,8 +19,11 @@ class Client:
             print('Got back: {}'.format(data.decode('utf-8')))
         if i:
             while input() != 'quit':
-                message = input()
-                s.sendall(message.encode('utf-8'))
+                while True:
+                    message = input()
+                    s.send(message.encode('utf-8'))
+                    if message.endswith('.'):
+                        break
                 data = s.recv(2000)
                 print('Got back: {}'.format(data.decode('utf-8')))
             s.shutdown(socket.SHUT_WR)

@@ -10,24 +10,25 @@ class Server:
         while True:
             conn, remote_addr = s.accept()
             print('[+] connection from {}'.format(remote_addr))
+            #chunks = []
             while True:
-                data = conn.recv(2000)
-                if not data:
-                    break
-                self.data_received(conn, data, remote_addr)
+                chunks = []
+                    while True:
+                    data = conn.recv(2000)
+                    if not data:
+                        break
+                    chunks.append(data.decode('utf-8'))
+                    message = ''.join(chunks)
+                    self.data_received(conn, data, remote_addr, message)
+                    chunks.append(' ')
+            conn.send('Good Bye!'.encode('utf-8'))
             conn.shutdown(socket.SHUT_RDWR)
             conn.close()
             break
         #threading.Timer(120)
         #print('Server shutting down. Good Bye!')
 
-    def data_received(self, conn, data, remote_addr):
-        chunks = []
+    def data_received(self, conn, data, remote_addr, message):
         if data.decode('utf-8').endswith('.'):
-            chunks.append(data.decode('utf-8'))
-            message = ''.join(chunks)
             print('received {} from  {}'.format(message, remote_addr))
             conn.send('Echo: {}'.format(message).encode('utf-8'))
-        else:
-            data = conn.recv(2000)
-            chunks.append(data.decode('utf-8'))
