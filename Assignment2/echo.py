@@ -1,6 +1,6 @@
 import click
 from client import Client
-from servertest import Server
+from server import Server
 
 @click.group()
 def cli():
